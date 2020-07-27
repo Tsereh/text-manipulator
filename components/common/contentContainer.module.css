@@ -1,0 +1,9 @@
+.contentContainer {
+  margin: 10px;
+}
+
+.textarea {
+  min-width: 400px;
+  min-height: 400px;
+  margin: 10px 0;
+}
