@@ -1,12 +1,9 @@
-import RuleStore from '../../stores/RuleStore'
-
-const RuleButton = (props: {toggleMenuVisibility: Function}) => {
+const AddProcess = (props: {toggleMenuVisibility: Function}) => {
     return (
         <span onClick={() => {
-            RuleStore.addRule({name: "find", regex: ""})
             props.toggleMenuVisibility()
         }}>
-            Find character sequence
+            Define changes
             <style jsx>{`
                 span {
                     cursor: pointer;
@@ -16,4 +13,4 @@ const RuleButton = (props: {toggleMenuVisibility: Function}) => {
     )
 }
 
-export default RuleButton
+export default AddProcess

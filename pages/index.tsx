@@ -4,6 +4,8 @@ import Layout from '../components/Layout'
 import InputArea from '../components/input/InputArea'
 import OutputArea from '../components/output/OutputArea'
 import RuleArea from '../components/rule/RuleArea'
+import ProcessArea from '../components/process/ProcessArea'
+import RuleStore from '../stores/RuleStore'
 
 export default function Home() {
   return (
@@ -15,6 +17,7 @@ export default function Home() {
 
       <main>
         <RuleArea />
+        {RuleStore.selectedRules && <ProcessArea />}
         <div className="ioRow">
           <InputArea />
           <OutputArea />

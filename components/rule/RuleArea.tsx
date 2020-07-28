@@ -15,7 +15,7 @@ const RuleArea = observer(() => {
     return (
         <div>
             {RuleStore.selectedRules.map((rule, index) => {
-                return rule.name === "Find" && <FindRule ruleIndex={index} key={index} />
+                return rule.name === "find" && <FindRule ruleIndex={index} key={index} />
             })}
             <AddRule toggleMenuVisibility={toggleMenuVisibility} />
             {menuVisibility && (
