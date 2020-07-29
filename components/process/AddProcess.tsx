@@ -1,6 +1,8 @@
+import styles from '../common/common.module.css'
+
 const AddProcess = (props: {toggleMenuVisibility: Function}) => {
     return (
-        <span onClick={() => {
+        <span className={`${styles.btn} ${styles.processBtn}`} onClick={() => {
             props.toggleMenuVisibility()
         }}>
             Define changes

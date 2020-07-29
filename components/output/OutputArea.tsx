@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react'
-import styles from "../common/contentContainer.module.css"
+import styles from "../common/common.module.css"
 import OutputStore from '../../stores/OutputStore'
 
 const OutputArea = observer(() => {

@@ -1,0 +1,23 @@
+.btn {
+    margin: 3px;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.ruleBtn {
+    background-color: #e4f0f5;
+}
+
+.processBtn {
+    background-color: #e4f5e5;
+}
+
+.contentContainer {
+    margin: 10px;
+}
+
+.textarea {
+    min-width: 400px;
+    min-height: 400px;
+    margin: 10px 0;
+}

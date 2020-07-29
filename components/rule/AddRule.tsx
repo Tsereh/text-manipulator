@@ -1,6 +1,8 @@
+import styles from '../common/common.module.css'
+
 const AddRule = (props: {toggleMenuVisibility: Function}) => {
     return (
-        <span onClick={() => {
+        <span className={`${styles.btn} ${styles.ruleBtn}`} onClick={() => {
             props.toggleMenuVisibility()
         }}>
             Add rule

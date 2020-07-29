@@ -21,6 +21,11 @@ const ProcessArea = observer(() => {
             {menuVisibility && (
                 <ProcessMenu toggleMenuVisibility={toggleMenuVisibility} />
             )}
+            <style jsx>{`
+                div {
+                    margin: 10px auto;
+                }
+            `}</style>
         </div>
     )
 })

@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 import InputStore from '../../stores/InputStore'
-import styles from '../common/contentContainer.module.css'
+import styles from '../common/common.module.css'
 
 interface HTMLInputEvent extends React.ChangeEvent {
     target: HTMLInputElement & EventTarget;

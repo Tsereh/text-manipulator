@@ -21,6 +21,11 @@ const RuleArea = observer(() => {
             {menuVisibility && (
                 <RuleMenu toggleMenuVisibility={toggleMenuVisibility} />
             )}
+            <style jsx>{`
+                div {
+                    margin: 10px auto;
+                }
+            `}</style>
         </div>
     )
 })
