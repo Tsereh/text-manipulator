@@ -1,6 +1,6 @@
 import React from 'react'
 import RuleStore from '../../stores/RuleStore'
-import styles from '../common/common.module.css'
+import { RuleBtn } from '../common/styledComponents'
 
 type Props = {
     ruleIndex: number
@@ -12,10 +12,10 @@ const FindRule = (props: Props) => {
     }
 
     return (
-        <span className={`${styles.btn} ${styles.ruleBtn}`}>
+        <RuleBtn>
             Find
             <input type="text" onChange={setInputValue}></input>
-        </span>
+        </RuleBtn>
     )
 }
 

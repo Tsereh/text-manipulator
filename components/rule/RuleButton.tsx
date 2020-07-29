@@ -1,19 +1,14 @@
 import RuleStore from '../../stores/RuleStore'
-import styles from '../common/common.module.css'
+import { RuleBtn } from '../common/styledComponents'
 
 const RuleButton = (props: {toggleMenuVisibility: Function}) => {
     return (
-        <span className={`${styles.btn} ${styles.ruleBtn}`} onClick={() => {
+        <RuleBtn onClick={() => {
             RuleStore.addRule({name: "find", regex: ""})
             props.toggleMenuVisibility()
         }}>
             Find character sequence
-            <style jsx>{`
-                span {
-                    cursor: pointer;
-                }
-            `}</style>
-        </span>
+        </RuleBtn>
     )
 }
 

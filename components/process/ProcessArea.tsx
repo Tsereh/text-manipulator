@@ -4,6 +4,7 @@ import ProcessStore from '../../stores/ProcessStore'
 import AddProcess from './AddProcess'
 import ProcessMenu from './ProcessMenu'
 import ProcessItem from './ProcessItem'
+import { ActionArea } from '../common/styledComponents'
 
 const ProcessArea = observer(() => {
     const [menuVisibility, setMenuVisibility] = useState(false)
@@ -13,7 +14,7 @@ const ProcessArea = observer(() => {
     }
 
     return (
-        <div>
+        <ActionArea>
             {ProcessStore.selectedProcesses.map((process, index) => {
                 return <ProcessItem processIndex={index} key={index} />
             })}
@@ -21,12 +22,7 @@ const ProcessArea = observer(() => {
             {menuVisibility && (
                 <ProcessMenu toggleMenuVisibility={toggleMenuVisibility} />
             )}
-            <style jsx>{`
-                div {
-                    margin: 10px auto;
-                }
-            `}</style>
-        </div>
+        </ActionArea>
     )
 })
 

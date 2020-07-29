@@ -4,6 +4,7 @@ import RuleStore from '../../stores/RuleStore'
 import AddRule from './AddRule'
 import RuleMenu from './RuleMenu'
 import FindRule from './FindRule'
+import { ActionArea } from '../common/styledComponents'
 
 const RuleArea = observer(() => {
     const [menuVisibility, setMenuVisibility] = useState(false)
@@ -13,7 +14,7 @@ const RuleArea = observer(() => {
     }
 
     return (
-        <div>
+        <ActionArea>
             {RuleStore.selectedRules.map((rule, index) => {
                 return rule.name === "find" && <FindRule ruleIndex={index} key={index} />
             })}
@@ -21,12 +22,7 @@ const RuleArea = observer(() => {
             {menuVisibility && (
                 <RuleMenu toggleMenuVisibility={toggleMenuVisibility} />
             )}
-            <style jsx>{`
-                div {
-                    margin: 10px auto;
-                }
-            `}</style>
-        </div>
+        </ActionArea>
     )
 })
 

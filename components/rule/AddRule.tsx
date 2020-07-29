@@ -1,17 +1,13 @@
-import styles from '../common/common.module.css'
+import RuleStore from '../../stores/RuleStore'
+import { RuleBtn } from '../common/styledComponents'
 
 const AddRule = (props: {toggleMenuVisibility: Function}) => {
     return (
-        <span className={`${styles.btn} ${styles.ruleBtn}`} onClick={() => {
+        <RuleBtn onClick={() => {
             props.toggleMenuVisibility()
         }}>
-            Add rule
-            <style jsx>{`
-                span {
-                    cursor: pointer;
-                }
-            `}</style>
-        </span>
+            {RuleStore.selectedRules.length ? "+" : "Find"}
+        </RuleBtn>
     )
 }
 

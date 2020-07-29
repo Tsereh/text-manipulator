@@ -1,20 +1,15 @@
 import ProcessStore from '../../stores/ProcessStore'
 import { processButtonText } from '../../utils/utils'
-import styles from '../common/common.module.css'
+import { ProcessBtn } from '../common/styledComponents'
 
 const ProcessMenuItem = (props: {toggleMenuVisibility: Function, processType: string}) => {
     return (
-        <span className={`${styles.btn} ${styles.processBtn}`} onClick={() => {
+        <ProcessBtn onClick={() => {
             ProcessStore.addProcess({name: props.processType, value: ""})
             props.toggleMenuVisibility()
         }}>
             {processButtonText(props.processType)}
-            <style jsx>{`
-                span {
-                    cursor: pointer;
-                }
-            `}</style>
-        </span>
+        </ProcessBtn>
     )
 }
 

@@ -6,6 +6,18 @@ import OutputArea from '../components/output/OutputArea'
 import RuleArea from '../components/rule/RuleArea'
 import ProcessArea from '../components/process/ProcessArea'
 import RuleStore from '../stores/RuleStore'
+import styled from 'styled-components'
+
+const Main = styled.main`
+  padding: 5rem 0;
+`
+const IORow = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`
 
 export default function Home() {
   return (
@@ -15,36 +27,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <Main>
         <RuleArea />
         {RuleStore.selectedRules && <ProcessArea />}
-        <div className="ioRow">
+        <IORow>
           <InputArea />
           <OutputArea />
-        </div>
-      </main>
-
-      <style jsx>{`
-        main {
-          padding: 5rem 0;
-        }
-
-        .ioRow {
-          flex: 1;
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-        }
-
-        #inputfile {
-          display: block;
-        }
-
-        #download-btn {
-          display: block;
-        }
-      `}</style>
+        </IORow>
+      </Main>
 
       <style jsx global>{`
         html,

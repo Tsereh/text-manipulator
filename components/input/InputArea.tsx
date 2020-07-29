@@ -1,7 +1,12 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 import InputStore from '../../stores/InputStore'
-import styles from '../common/common.module.css'
+import styled from 'styled-components'
+import { IOTextArea, IOContainer } from '../common/styledComponents'
+
+const Input = styled.input`
+    display: block;
+`
 
 interface HTMLInputEvent extends React.ChangeEvent {
     target: HTMLInputElement & EventTarget;
@@ -17,18 +22,12 @@ const InputArea = observer(() => {
     }
 
     return(
-        <div className={styles.contentContainer}>
-            <textarea placeholder="Input original text here" className={styles.textarea} value={InputStore.content} onChange={contentTyped} />
+        <IOContainer>
+            <IOTextArea placeholder="Input original text here" value={InputStore.content} onChange={contentTyped} />
             <label htmlFor="inputfile" className="inputfile-label">
-                <input type="file" name="inputfile" id="inputfile" onChange={fileSelected} />
+                <Input type="file" name="inputfile" id="inputfile" onChange={fileSelected} />
             </label>
-            
-            <style jsx>{`
-                #inputfile {
-                    display: block;
-                }
-            `}</style>
-        </div>
+        </IOContainer>
     )
 })
 
