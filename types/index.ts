@@ -1,6 +1,7 @@
 export type Rule = {
     name: string,
-    regex: string
+    value?: string,
+    editableValue: boolean
 }
 
 export type Process = {

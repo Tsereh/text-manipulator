@@ -3,11 +3,13 @@ import styled from 'styled-components'
 export const IOTextArea = styled.textarea`
     min-width: 400px;
     min-height: 400px;
-    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
 `
 
 export const IOContainer = styled.div`
-    margin: 10px;
+    flex-grow: 1;
 `
 
 export const ItemBtn = styled.span`
@@ -15,7 +17,6 @@ export const ItemBtn = styled.span`
     padding: 3px;
     border-radius: 3px;
     user-select: none;
-    cursor: pointer;
 `
 
 export const ProcessBtn = styled(ItemBtn)`
@@ -28,4 +29,14 @@ export const RuleBtn = styled(ItemBtn)`
 
 export const ActionArea = styled.div`
     margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
+`
+
+export const DroppableList = styled.div`
+    margin: 5px 0 10px;
+    padding: 10px 5px;
+    border: 1px solid #d6d6d6;
+    border-radius: 5px;
 `

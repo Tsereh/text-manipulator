@@ -7,9 +7,11 @@ import RuleArea from '../components/rule/RuleArea'
 import ProcessArea from '../components/process/ProcessArea'
 import RuleStore from '../stores/RuleStore'
 import styled from 'styled-components'
+import { resetServerContext } from 'react-beautiful-dnd'
 
 const Main = styled.main`
   padding: 5rem 0;
+  width: 1200px;
 `
 const IORow = styled.div`
   flex: 1;
@@ -17,9 +19,19 @@ const IORow = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  div:nth-of-type(1) {
+    margin-right: 10px;
+  }
+
+  div:nth-of-type(2) {
+    margin-left: 10px;
+  }
 `
 
 export default function Home() {
+  resetServerContext()
+
   return (
     <Layout>
       <Head>

@@ -1,27 +1,41 @@
 import { useState } from 'react'
 import { observer } from "mobx-react"
-import RuleStore from '../../stores/RuleStore'
-import AddRule from './AddRule'
-import RuleMenu from './RuleMenu'
-import FindRule from './FindRule'
+import styled from 'styled-components'
+import { DragDropContext, DropResult } from 'react-beautiful-dnd'
+import RuleResourceArea from './RuleResourceArea'
+import RuleSelectedArea from './RuleSelectedArea'
 import { ActionArea } from '../common/styledComponents'
+import RuleStore from '../../stores/RuleStore'
+
+const Header = styled.h1`
+    font-size: 1rem;
+    margin-top: 0;
+`
+
+const Info = styled.p`
+    margin-top: 0;
+    color: rgba(0, 0, 0, 0.8);
+`
 
 const RuleArea = observer(() => {
-    const [menuVisibility, setMenuVisibility] = useState(false)
-
-    const toggleMenuVisibility = () => {
-        setMenuVisibility(!menuVisibility)
+    const onDragEnd = (result: DropResult) => {
+        if (result.source.droppableId === "RuleResourceArea" && result.destination.droppableId === "RuleSelectedArea") {
+            RuleStore.addRule(RuleStore.availableRules[result.source.index], result.destination.index)
+            RuleStore.resetAvailableRuleValue(result.source.index)
+            return
+        }
     }
 
     return (
         <ActionArea>
-            {RuleStore.selectedRules.map((rule, index) => {
-                return rule.name === "find" && <FindRule ruleIndex={index} key={index} />
-            })}
-            <AddRule toggleMenuVisibility={toggleMenuVisibility} />
-            {menuVisibility && (
-                <RuleMenu toggleMenuVisibility={toggleMenuVisibility} />
-            )}
+            <div>
+                <Header>Query Rules</Header>
+                <Info>Drag & drop available rules into the query area, assembling rules into logic that will find parts to process from provided text.</Info>
+            </div>
+            <DragDropContext onDragEnd={onDragEnd}>
+                <RuleResourceArea key="RuleResourceArea" />
+                <RuleSelectedArea key="RuleSelectedArea" />
+            </DragDropContext>
         </ActionArea>
     )
 })
