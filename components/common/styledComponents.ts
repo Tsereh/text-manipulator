@@ -36,7 +36,10 @@ export const ActionArea = styled.div`
 
 export const DroppableList = styled.div`
     margin: 5px 0 10px;
-    padding: 10px 5px;
+    padding: 0 5px;
     border: 1px solid #d6d6d6;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
 `

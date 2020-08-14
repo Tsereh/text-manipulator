@@ -12,7 +12,7 @@ const RuleResourceArea = () => {
 
     return (
         <Container>
-            <Droppable droppableId="RuleResourceArea">
+            <Droppable droppableId="RuleResourceArea" direction="horizontal" >
                 {(provided: DroppableProvided) => (
                     <div>
                         <div>Available Rules</div>
@@ -21,7 +21,7 @@ const RuleResourceArea = () => {
                             {...provided.droppableProps}
                         >
                             {RuleStore.availableRules.map((rule, index) => 
-                                <RuleDraggable key={rule.name + index} index={index} rule={rule} />
+                                <RuleDraggable key={rule.id} index={index} rule={rule} />
                             )}
                             {provided.placeholder}
                         </DroppableList>

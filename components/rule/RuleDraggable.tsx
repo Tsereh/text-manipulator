@@ -1,30 +1,19 @@
 import React from 'react'
-import RuleStore from '../../stores/RuleStore'
-import { RuleBtn } from '../common/styledComponents'
-import { Draggable, DraggableProvided } from 'react-beautiful-dnd'
+import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { Rule } from '../../types'
+import RuleButton from './RuleButton'
 
 type Props = {
     index: number,
-    rule: Rule
+    rule: Rule,
+    selected?: boolean
 }
 
 const RuleDraggable = (props: Props) => {
-    function setInputValue(event: React.FormEvent<HTMLInputElement>) {
-        RuleStore.setRuleValue(props.index, event.currentTarget.value)
-    }
-
     return (
-        <Draggable draggableId={props.rule.name + props.index} index={props.index}>
-            {(provided: DraggableProvided) => (
-                <RuleBtn
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    ref={provided.innerRef}
-                >
-                    Find
-                    {props.rule.editableValue && (<input type="text" onChange={setInputValue}></input>)}
-                </RuleBtn>
+        <Draggable draggableId={props.rule.id} index={props.index}>
+            {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
+                <RuleButton {...props} provided={provided} snapshot={snapshot} />
             )}
         </Draggable>
     )

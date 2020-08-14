@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { observer } from "mobx-react"
 import styled from 'styled-components'
 import { DragDropContext, DropResult } from 'react-beautiful-dnd'
@@ -19,10 +18,19 @@ const Info = styled.p`
 
 const RuleArea = observer(() => {
     const onDragEnd = (result: DropResult) => {
-        if (result.source.droppableId === "RuleResourceArea" && result.destination.droppableId === "RuleSelectedArea") {
-            RuleStore.addRule(RuleStore.availableRules[result.source.index], result.destination.index)
-            RuleStore.resetAvailableRuleValue(result.source.index)
+        const { source, destination } = result
+
+        if (!destination) {
             return
+        }
+
+        if (source.droppableId === "RuleResourceArea" && destination.droppableId === "RuleSelectedArea") {
+            RuleStore.addRule(RuleStore.availableRules[source.index], destination.index)
+            RuleStore.resetAvailableRuleValue(source.index)
+        } else if (source.droppableId === "RuleSelectedArea" && destination.droppableId === "RuleSelectedArea") {
+            RuleStore.reorder(source.index, destination.index)
+        } else if (source.droppableId === "RuleSelectedArea" && destination.droppableId === "RuleResourceArea") {
+            RuleStore.removeRule(source.index)
         }
     }
 

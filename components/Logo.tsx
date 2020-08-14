@@ -9,6 +9,7 @@ export default function Logo() {
                     margin: 4px;
                     font-weight: 100;
                     font-size: 1.4rem;
+                    user-select: none;
                 }
                 div span {
                     padding: 4px;

@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from 'styled-components'
 import { Droppable, DroppableProvided } from 'react-beautiful-dnd'
 import RuleDraggable from './RuleDraggable'
@@ -16,9 +17,9 @@ const RuleSelectedArea = () => {
 
     return (
         <Container>
-            <Droppable droppableId="RuleSelectedArea">
+            <Droppable droppableId="RuleSelectedArea" direction="horizontal">
                 {(provided: DroppableProvided) => (
-                    <div>
+                    <React.Fragment>
                         <div>Query</div>
                         <DroppableList
                             ref={provided.innerRef}
@@ -28,11 +29,11 @@ const RuleSelectedArea = () => {
                                 <RulePlaceholder>Drag rules here</RulePlaceholder>
                             )}
                             {RuleStore.selectedRules.map((rule, index) =>
-                                <RuleDraggable key={rule.name + index} index={index} rule={rule} />
+                                <RuleDraggable key={rule.id} index={index} rule={rule} selected />
                             )}
                             {provided.placeholder}
                         </DroppableList>
-                    </div>
+                    </React.Fragment>
                 )}
             </Droppable>
         </Container>

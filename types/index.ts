@@ -1,4 +1,5 @@
 export type Rule = {
+    id: string,
     name: string,
     value?: string,
     editableValue: boolean
