@@ -1,6 +1,6 @@
 import React from 'react'
 import { observer } from 'mobx-react'
-import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
+import { DraggableProvided, DraggableStateSnapshot, DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd'
 import RuleStore from '../../stores/RuleStore'
 import { RuleBtn } from '../common/styledComponents'
 import { Rule } from '../../types'
@@ -11,6 +11,18 @@ type Props = {
     selected?: boolean,
     provided: DraggableProvided,
     snapshot: DraggableStateSnapshot
+}
+
+function getStyle(style: DraggingStyle | NotDraggingStyle, snapshot: DraggableStateSnapshot, selected?: boolean) {
+    if (!snapshot.isDragging && !selected) return {}
+    if (!snapshot.isDropAnimating) {
+        return style
+    }
+    return {
+        ...style,
+        // cannot be 0, but make it super tiny
+        transitionDuration: `0.001s`
+    }
 }
 
 const RuleButton = observer((props: Props) => {
@@ -24,6 +36,7 @@ const RuleButton = observer((props: Props) => {
                 {...props.provided.draggableProps}
                 {...props.provided.dragHandleProps}
                 ref={props.provided.innerRef}
+                style={getStyle(props.provided.draggableProps.style, props.snapshot, props.selected)}
             >
                 Find
                 {props.rule.editableValue && (<input type="text" onChange={setInputValue} value={props.selected ? RuleStore.selectedRules[props.index].value : RuleStore.availableRules[props.index].value} />)}
