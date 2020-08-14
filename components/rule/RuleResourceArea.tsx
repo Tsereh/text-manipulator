@@ -1,8 +1,8 @@
 import styled from 'styled-components'
-import { Droppable, DroppableProvided } from 'react-beautiful-dnd'
-import RuleDraggable from './RuleDraggable'
+import { Droppable, Draggable, DroppableProvided, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { DroppableList } from '../common/styledComponents'
 import RuleStore from '../../stores/RuleStore'
+import RuleButton from './RuleButton'
 
 const Container = styled.div`
 
@@ -21,7 +21,11 @@ const RuleResourceArea = () => {
                             {...provided.droppableProps}
                         >
                             {RuleStore.availableRules.map((rule, index) => 
-                                <RuleDraggable key={rule.id} index={index} rule={rule} />
+                                <Draggable draggableId={rule.id} index={index} key={rule.id} >
+                                    {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
+                                        <RuleButton index={index} rule={rule} provided={provided} snapshot={snapshot} />
+                                    )}
+                                </Draggable>
                             )}
                             {provided.placeholder}
                         </DroppableList>
