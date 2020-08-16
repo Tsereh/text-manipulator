@@ -1,6 +1,7 @@
+import { useState, Fragment } from 'react'
 import { observer } from "mobx-react"
 import styled from 'styled-components'
-import { DragDropContext, DropResult } from 'react-beautiful-dnd'
+import { DragDropContext, DropResult, DragStart } from 'react-beautiful-dnd'
 import RuleResourceArea from './RuleResourceArea'
 import RuleSelectedArea from './RuleSelectedArea'
 import { ActionArea } from '../common/styledComponents'
@@ -13,11 +14,14 @@ const Header = styled.h1`
 
 const Info = styled.p`
     margin-top: 0;
-    color: rgba(0, 0, 0, 0.8);
 `
 
 const RuleArea = observer(() => {
+    const [draggingSelected, setDraggingSelected] = useState(false)
+
     const onDragEnd = (result: DropResult) => {
+        setDraggingSelected(false)
+
         const { source, destination } = result
 
         if (!destination) {
@@ -34,14 +38,18 @@ const RuleArea = observer(() => {
         }
     }
 
+    const onDragStart = (start: DragStart) => {
+        start.source.droppableId === "RuleSelectedArea" && setDraggingSelected(true)
+    }
+
     return (
         <ActionArea>
-            <div>
+            <Fragment>
                 <Header>Query Rules</Header>
                 <Info>Drag & drop available rules into the query area, assembling rules into logic that will find parts to process from provided text.</Info>
-            </div>
-            <DragDropContext onDragEnd={onDragEnd}>
-                <RuleResourceArea key="RuleResourceArea" />
+            </Fragment>
+            <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
+                <RuleResourceArea key="RuleResourceArea" showRemovalInfo={draggingSelected} />
                 <RuleSelectedArea key="RuleSelectedArea" />
             </DragDropContext>
         </ActionArea>

@@ -1,13 +1,9 @@
-import React from 'react'
+import { Fragment } from 'react'
 import styled from 'styled-components'
 import { Droppable, Draggable, DroppableProvided, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import RuleStore from '../../stores/RuleStore'
-import { DroppableList, ItemBtn } from '../common/styledComponents'
+import { DroppableList, ItemBtn, AreaLabel } from '../common/styledComponents'
 import RuleButton from './RuleButton'
-
-const Container = styled.div`
-
-`
 
 const RulePlaceholder = styled(ItemBtn)`
     color: rgba(0, 0, 0, 0.5);
@@ -16,11 +12,11 @@ const RulePlaceholder = styled(ItemBtn)`
 const RuleSelectedArea = () => {
 
     return (
-        <Container>
+        <Fragment>
             <Droppable droppableId="RuleSelectedArea" direction="horizontal">
                 {(provided: DroppableProvided) => (
-                    <React.Fragment>
-                        <div>Query</div>
+                    <Fragment>
+                        <AreaLabel>Query</AreaLabel>
                         <DroppableList
                             ref={provided.innerRef}
                             {...provided.droppableProps}
@@ -37,10 +33,10 @@ const RuleSelectedArea = () => {
                             )}
                             {provided.placeholder}
                         </DroppableList>
-                    </React.Fragment>
+                    </Fragment>
                 )}
             </Droppable>
-        </Container>
+        </Fragment>
     )
 }
 

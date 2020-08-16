@@ -14,9 +14,11 @@ export const IOContainer = styled.div`
 
 export const ItemBtn = styled.span`
     margin: 3px;
-    padding: 3px;
+    padding: 3px 5px;
     border-radius: 3px;
     user-select: none;
+    display: flex;
+    align-items: center;
 `
 
 export const ProcessBtn = styled(ItemBtn)`
@@ -35,11 +37,17 @@ export const ActionArea = styled.div`
 `
 
 export const DroppableList = styled.div`
-    margin: 5px 0 10px;
+    margin-bottom: 10px;
     padding: 0 5px;
     border: 1px solid #d6d6d6;
     border-radius: 5px;
     display: flex;
     align-items: center;
-    min-height: 50px;
+    height: 50px;
+`
+
+export const AreaLabel = styled.div`
+    font-size: 0.9rem;
+    margin-left: 3px;
+    color: rgba(0, 0, 0, 0.8);
 `
