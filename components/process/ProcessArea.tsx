@@ -15,7 +15,7 @@ const ProcessArea = observer(() => {
 
     return (
         <ActionArea>
-            {ProcessStore.selectedProcesses.map((process, index) => {
+            {ProcessStore.selectedProcesses.map((_process, index) => {
                 return <ProcessItem processIndex={index} key={index} />
             })}
             <AddProcess toggleMenuVisibility={toggleMenuVisibility} />
