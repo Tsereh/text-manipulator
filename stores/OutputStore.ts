@@ -1,32 +1,52 @@
-import { observable, autorun } from 'mobx'
+import { observable, toJS, action, reaction, autorun } from 'mobx'
 import RuleStore from './RuleStore'
 import InputStore from './InputStore'
 import ProcessStore from './ProcessStore'
 
 class OutputStore {
+    worker: Worker
+
     @observable content?: string
 
-    outputUpdate = autorun(() => {
-        let output = InputStore.content
-        for (let i = 0; i < RuleStore.selectedRules.length; i++) {
-            if (RuleStore.selectedRules[i].name === "Find") {
-                if (ProcessStore.selectedProcesses.length) {
-                    switch (ProcessStore.selectedProcesses[0].name) {
-                        case "remove":
-                            output = output.replace(new RegExp(RuleStore.selectedRules[i].value, "g"), "")
-                            break
-                        case "leave-only":
-                            output = output.replace(new RegExp("(" + RuleStore.selectedRules[i].value + ")|(.)", "g"), "$1")
-                            break
-                        case "replace":
-                            output = output.replace(new RegExp(RuleStore.selectedRules[i].value, "g"), ProcessStore.selectedProcesses[i].value)
-                            break
-                    }
-                }
-            }
+    constructor() {
+        // Init worker only on client side
+        if (typeof window !== 'undefined') {
+            this.worker = new Worker('/output.worker.js')
+            this.worker.onmessage = this.handleReceivedOutput
         }
-        this.content = output
-    })
+    }
+
+    sendInput = reaction(
+        () => InputStore.content,
+        () => {
+            const data = {
+                inputData: toJS(InputStore.content)
+            }
+            this.worker !== undefined && this.worker.postMessage(data)
+        }
+    )
+
+    sendRules = autorun(
+        () => {
+            const data = {
+                ruleData: toJS(RuleStore.selectedRules)
+            }
+            this.worker !== undefined && this.worker.postMessage(data)
+        }
+    )
+
+    sendProcesses = autorun(
+        () => {
+            const data = {
+                processData: toJS(ProcessStore.selectedProcesses)
+            }
+            this.worker !== undefined && this.worker.postMessage(data)
+        }
+    )
+
+    @action handleReceivedOutput = (e: MessageEvent) => {
+        this.content = e.data
+    }
 }
 
 export default new OutputStore()
