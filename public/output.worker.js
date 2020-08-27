@@ -11,7 +11,7 @@ self.onmessage = (e) => {
     
     if (output && selectedRules) {
         for (var i = 0; i < selectedRules.length; i++) {
-            if (selectedRules[i].name === "Find") {
+            if (selectedRules[i].name === "Find" && selectedRules[i].value) {
                 if (selectedProcesses && selectedProcesses.length) {
                     switch (selectedProcesses[0].name) {
                         case "remove":
