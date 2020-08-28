@@ -22,6 +22,11 @@ const Headers = styled.div`
     & span {
         margin-left: 45px;
         color: rgba(0,0,0,0.8);
+        background-color: rgb(231 232 232);
+        padding: 0px 6px;
+        border-radius: 5px 5px 0 0;
+        border: 1px solid #d9d9da;
+        border-bottom: none;
     }
 `
 
