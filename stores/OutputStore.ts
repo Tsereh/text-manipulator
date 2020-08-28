@@ -47,6 +47,10 @@ class OutputStore {
     @action handleReceivedOutput = (e: MessageEvent) => {
         this.content = e.data
     }
+
+    @action setContent = (value: string) => {
+        this.content = value
+    }
 }
 
 export default new OutputStore()

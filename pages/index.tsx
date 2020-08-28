@@ -1,12 +1,10 @@
 import 'mobx-react-lite/batchingForReactDom'
 import Head from 'next/head'
 import Layout from '../components/Layout'
-import InputArea from '../components/input/InputArea'
-import OutputArea from '../components/output/OutputArea'
 import RuleArea from '../components/rule/RuleArea'
 import ProcessArea from '../components/process/ProcessArea'
-import RuleStore from '../stores/RuleStore'
 import styled from 'styled-components'
+import IOArea from '../components/editor/IOArea'
 import { resetServerContext } from 'react-beautiful-dnd'
 
 const Main = styled.main`
@@ -41,11 +39,8 @@ export default function Home() {
 
       <Main>
         <RuleArea />
-        {RuleStore.selectedRules && <ProcessArea />}
-        <IORow>
-          <InputArea />
-          <OutputArea />
-        </IORow>
+        <ProcessArea />
+        <IOArea />
       </Main>
 
       <style jsx global>{`
@@ -60,6 +55,15 @@ export default function Home() {
 
         * {
           box-sizing: border-box;
+        }
+        .codeMarker {
+          background: #fff677;
+          position: absolute;
+          z-index: 20;
+        }
+        #ace-editor {
+          border: 1px solid #c1c1c1;
+          border-radius: 5px;
         }
       `}</style>
     </Layout>
