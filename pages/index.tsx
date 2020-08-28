@@ -11,21 +11,6 @@ const Main = styled.main`
   padding: 5rem 0;
   width: 1200px;
 `
-const IORow = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-
-  div:nth-of-type(1) {
-    margin-right: 10px;
-  }
-
-  div:nth-of-type(2) {
-    margin-left: 10px;
-  }
-`
 
 export default function Home() {
   resetServerContext()
@@ -59,7 +44,6 @@ export default function Home() {
         .codeMarker {
           background: #fff677;
           position: absolute;
-          z-index: 20;
         }
         #ace-editor {
           border: 1px solid #c1c1c1;

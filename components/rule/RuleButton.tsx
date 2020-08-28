@@ -59,7 +59,7 @@ const RuleButton = observer((props: Props) => {
                 style={getStyle(props.provided.draggableProps.style, props.snapshot, props.selected)}
                 isDragging={props.snapshot.isDragging}
             >
-                Find
+                {props.rule.name}
                 {props.rule.editableValue && (
                     <InputWrapper>
                         <AutosizeInput type="text" onChange={setInputValue} value={props.selected ? RuleStore.selectedRules[props.index].value : RuleStore.availableRules[props.index].value} />
@@ -68,7 +68,7 @@ const RuleButton = observer((props: Props) => {
             </DraggableRule>
             {!props.selected && props.snapshot.isDragging && (
                 <RuleBtn>
-                    Find
+                    {props.rule.name}
                     {props.rule.editableValue && (
                         <InputWrapper>
                             <AutosizeInput type="text"/>
