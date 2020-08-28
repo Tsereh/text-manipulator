@@ -15,7 +15,6 @@ const InputWrapper = styled.div`
         padding: 5px 3px;
         min-width: 40px;
         background-color: #fff;
-        cursor: text;
         &:focus {
             outline: 0;
             box-shadow: inset 0px 0px 1px rgba(0,0,0,0.5);
