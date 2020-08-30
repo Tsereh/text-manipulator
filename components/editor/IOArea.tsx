@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import InputStore from '../../stores/InputStore'
 import Editor from './Editor'
@@ -29,18 +29,74 @@ const Headers = styled.div`
         border-bottom: none;
     }
 `
+const ToggleControl = styled.label`
+    position: absolute;
+    right: 40px;
+    margin-top: -6px;
+    display: block;
+    padding-left: 45px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 17px;
+    user-select: none;
+    & input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+    & input:checked ~ span {
+        background-color: #fff677;
+    }
+    & input:checked ~ span:after {
+        left: 22px;
+    }
+`
+const Control = styled.span`
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: darkgray;
+    transition: background-color 0.15s ease-in;
+    &:after {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 2px;
+        width: 16px;
+        height: 16px;
+        border-radius: 25px;
+        background: white;
+        transition: left 0.15s ease-in;
+    }
+`
 
 interface HTMLInputEvent extends React.ChangeEvent {
     target: HTMLInputElement & EventTarget;
 }
 
 const IOArea = () => {
+    const [highlight, setHighlight] = useState(false)
+
+    function toggleHighlight() {
+        setHighlight(!highlight)
+    }
+
     function fileSelected(e: HTMLInputEvent) {
         InputStore.setFile(e.target.files[0])
     }
 
     return (
         <ActionArea>
+            <ToggleControl>
+                <input type="checkbox" checked={highlight} onChange={toggleHighlight} />
+                <Control />
+                Highlight changes
+            </ToggleControl>
             <Headers>
                 <div>
                     <span>
@@ -53,7 +109,7 @@ const IOArea = () => {
                     </span>
                 </div>
             </Headers>
-            <Editor />
+            <Editor highligh={highlight} />
             <FileManager>
                 <div>
                     <label htmlFor="inputfile" className="inputfile-label">
