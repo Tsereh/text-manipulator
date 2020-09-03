@@ -31,7 +31,7 @@ const Headers = styled.div`
 `
 const HighlighToggle = styled.label`
     position: absolute;
-    right: 40px;
+    right: 10px;
     margin-top: -6px;
     display: block;
     padding-left: 45px;
