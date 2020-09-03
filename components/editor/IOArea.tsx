@@ -117,7 +117,7 @@ const IOArea = () => {
                     </label>
                 </div>
                 <div>
-                    <button>Download File</button>
+                    <button>Save Result</button>
                 </div>
             </FileManager>
         </ActionArea>
