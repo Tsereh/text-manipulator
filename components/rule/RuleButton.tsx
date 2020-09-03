@@ -2,25 +2,9 @@ import React from 'react'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
 import { DraggableProvided, DraggableStateSnapshot, DraggingStyle, NotDraggingStyle } from 'react-beautiful-dnd'
-import AutosizeInput from 'react-input-autosize'
-import RuleStore from '../../stores/RuleStore'
 import { RuleBtn } from '../common/styledComponents'
 import { Rule } from '../../types'
-
-const InputWrapper = styled.div`
-    & > div > input {
-        border: none;
-        margin-left: 5px;
-        min-width: 30px;
-        padding: 5px 3px;
-        min-width: 40px;
-        background-color: #fff;
-        &:focus {
-            outline: 0;
-            box-shadow: inset 0px 0px 1px rgba(0,0,0,0.5);
-        }
-    }
-`
+import RuleValueControls from './RuleValueControls'
 
 const DraggableRule = styled(RuleBtn)<{isDragging: boolean}>`
     box-shadow: ${props => (props.isDragging ? '1px 1px 5px 0px rgba(0,0,0,0.75)' : 'none')};
@@ -34,6 +18,7 @@ type Props = {
     snapshot: DraggableStateSnapshot
 }
 
+// Make draggable drop animation unvisible when dropping selected rule to be removed (by setting transition to minimal value)
 function getStyle(style: DraggingStyle | NotDraggingStyle, snapshot: DraggableStateSnapshot, selected?: boolean) {
     if (!snapshot.isDragging && !selected) return {}
     if (!snapshot.isDropAnimating || snapshot.draggingOver === "RuleSelectedArea") {
@@ -46,10 +31,6 @@ function getStyle(style: DraggingStyle | NotDraggingStyle, snapshot: DraggableSt
 }
 
 const RuleButton = observer((props: Props) => {
-    function setInputValue(event: React.FormEvent<HTMLInputElement>) {
-        props.selected ? RuleStore.setRuleValue(props.index, event.currentTarget.value) : RuleStore.setAvailableRuleValue(props.index, event.currentTarget.value)
-    }
-
     return (
         <React.Fragment>
             <DraggableRule
@@ -60,20 +41,12 @@ const RuleButton = observer((props: Props) => {
                 isDragging={props.snapshot.isDragging}
             >
                 {props.rule.name}
-                {props.rule.editableValue && (
-                    <InputWrapper>
-                        <AutosizeInput type="text" onChange={setInputValue} value={props.selected ? RuleStore.selectedRules[props.index].value : RuleStore.availableRules[props.index].value} />
-                    </InputWrapper>
-                )}
+                {props.rule.editableValue && <RuleValueControls index={props.index} selected={props.selected} />}
             </DraggableRule>
             {!props.selected && props.snapshot.isDragging && (
                 <RuleBtn>
                     {props.rule.name}
-                    {props.rule.editableValue && (
-                        <InputWrapper>
-                            <AutosizeInput type="text"/>
-                        </InputWrapper>
-                    )}
+                    {props.rule.editableValue && <RuleValueControls index={props.index} selected={props.selected} />}
                 </RuleBtn>
             )}
         </React.Fragment>

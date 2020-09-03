@@ -3,7 +3,8 @@ export type Rule = {
     type: string,
     name: string,
     value?: string,
-    editableValue: boolean
+    editableValue: boolean,
+    caseSensitive?: boolean
 }
 
 export type Process = {

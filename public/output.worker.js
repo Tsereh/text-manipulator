@@ -8,10 +8,18 @@ function getRegex() {
 
         switch (rule.type) {
             case "find":
-                regex = regex + rule.value;
+                if (rule.caseSensitive) {
+                    regex = regex + rule.value;
+                } else {
+                    regex = regex + rule.value.split('').map(function(c){return '['+c.toLowerCase()+c.toUpperCase()+']'}).join('');
+                }
                 break;
             case "anyof":
-                regex = regex + "[" + rule.value + "]";
+                if (rule.caseSensitive) {
+                    regex = regex + "[" + rule.value + "]";
+                } else {
+                    regex = regex + "[" + rule.value.toLowerCase() + rule.value.toUpperCase() + "]";
+                }
                 break;
         };
     };

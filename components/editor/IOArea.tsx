@@ -29,7 +29,7 @@ const Headers = styled.div`
         border-bottom: none;
     }
 `
-const ToggleControl = styled.label`
+const HighlighToggle = styled.label`
     position: absolute;
     right: 40px;
     margin-top: -6px;
@@ -92,11 +92,11 @@ const IOArea = () => {
 
     return (
         <ActionArea>
-            <ToggleControl>
+            <HighlighToggle>
                 <input type="checkbox" checked={highlight} onChange={toggleHighlight} />
                 <Control />
                 Highlight changes
-            </ToggleControl>
+            </HighlighToggle>
             <Headers>
                 <div>
                     <span>

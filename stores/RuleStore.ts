@@ -20,6 +20,10 @@ class RuleStore {
         this.selectedRules[ruleIndex].value = newValue
     }
 
+    @action toggleRuleCaseSensitivity(ruleIndex: number) {
+        this.selectedRules[ruleIndex].caseSensitive = !this.selectedRules[ruleIndex].caseSensitive
+    }
+
     @action removeRule(index: number) {
         this.selectedRules.splice(index, 1)
     }
@@ -33,6 +37,10 @@ class RuleStore {
 
     @action setAvailableRuleValue(ruleIndex: number, newValue: string) {
         this.availableRules[ruleIndex].value = newValue
+    }
+
+    @action toggleAvailableRuleCaseSensitivity(ruleIndex: number) {
+        this.availableRules[ruleIndex].caseSensitive = !this.availableRules[ruleIndex].caseSensitive
     }
 }
 

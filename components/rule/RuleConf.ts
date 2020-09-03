@@ -6,13 +6,15 @@ export const RuleTypes: Rule[] = [
         type: "find",
         name: "Sequence",
         editableValue: true,
-        value: ""
+        value: "",
+        caseSensitive: true
     },
     {
         id: "1",
         type: "anyof",
         name: "Any of",
         editableValue: true,
-        value: ""
+        value: "",
+        caseSensitive: true
     }
 ]
