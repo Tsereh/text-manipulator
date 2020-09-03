@@ -34,6 +34,7 @@ export const ActionArea = styled.div`
     padding: 10px;
     border: 1px solid #d6d6d6;
     border-radius: 5px;
+    box-shadow: 0px 0.5px 1px 0px rgb(0 0 0 / 25%);
     position: relative;
 `
 
