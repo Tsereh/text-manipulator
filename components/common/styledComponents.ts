@@ -14,7 +14,7 @@ export const IOContainer = styled.div`
 
 export const ItemBtn = styled.span`
     margin: 3px;
-    padding: 3px 5px;
+    padding: 2px 4px;
     border-radius: 3px;
     user-select: none;
     display: flex;
@@ -27,6 +27,7 @@ export const ProcessBtn = styled(ItemBtn)`
 
 export const RuleBtn = styled(ItemBtn)`
     background-color: #e4f5e5;
+    border: 1px solid #d5e8d6;
 `
 
 export const ActionArea = styled.div`
