@@ -48,7 +48,7 @@ const HighlighToggle = styled.label`
     }
     & input:checked ~ span {
         background-color: #fff677;
-        box-shadow: inset 0px 0px 20px 0px rgb(0 0 0 / 0.1);
+        box-shadow: inset 0px 0px 10px 0px rgb(0 0 0 / 0.1);
     }
     & input:checked ~ span:after {
         left: 22px;
