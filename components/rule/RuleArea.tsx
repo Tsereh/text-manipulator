@@ -7,11 +7,13 @@ import RuleSelectedArea from './RuleSelectedArea'
 import { ActionArea } from '../common/styledComponents'
 import RuleStore from '../../stores/RuleStore'
 
+const Container = styled(ActionArea)`
+    border-radius: 5px 5px 0 0;
+`
 const Header = styled.h1`
     font-size: 1rem;
     margin-top: 0;
 `
-
 const Info = styled.p`
     margin-top: 0;
 `
@@ -43,7 +45,7 @@ const RuleArea = observer(() => {
     }
 
     return (
-        <ActionArea>
+        <Container>
             <Fragment>
                 <Header>Query Rules</Header>
                 <Info>Drag & drop available rules into the query area, assembling rules into logic that will find parts to process from provided text.</Info>
@@ -52,7 +54,7 @@ const RuleArea = observer(() => {
                 <RuleResourceArea key="RuleResourceArea" showRemovalInfo={draggingSelected} />
                 <RuleSelectedArea key="RuleSelectedArea" />
             </DragDropContext>
-        </ActionArea>
+        </Container>
     )
 })
 

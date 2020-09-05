@@ -1,23 +1,9 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 import styled from 'styled-components'
-import AutosizeInput from 'react-input-autosize'
 import RuleStore from '../../stores/RuleStore'
+import Input from '../common/Input'
 
-const InputWrapper = styled.div`
-    & > div > input {
-        border: none;
-        margin-left: 5px;
-        min-width: 30px;
-        padding: 5px 3px;
-        min-width: 40px;
-        background-color: #fff;
-        &:focus {
-            outline: 0;
-            box-shadow: inset 0px 0px 1px rgba(0,0,0,0.5);
-        }
-    }
-`
 const CaseToggle = styled.label<{checked: boolean}>`
     cursor: pointer;
     user-select: none;
@@ -64,9 +50,7 @@ const RuleValueControls = observer((props: Props) => {
 
     return (
         <React.Fragment>
-            <InputWrapper>
-                <AutosizeInput type="text" onChange={setInputValue} value={rule.value} />
-            </InputWrapper>
+            <Input setInputValue={setInputValue} value={rule.value} />
             <CaseToggle title={rule.caseSensitive ? "turn case sensitivity off" : "turn case sensitivity on"} checked={rule.caseSensitive}>
                 <input type="checkbox" onChange={toggleCaseSensitive} checked={rule.caseSensitive} />
                 <span>CASE</span>

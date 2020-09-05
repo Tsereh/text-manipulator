@@ -38,7 +38,7 @@ class OutputStore {
     sendProcesses = autorun(
         () => {
             const data = {
-                processData: toJS(ProcessStore.selectedProcesses)
+                processData: toJS(ProcessStore.selectedProcess)
             }
             this.worker !== undefined && this.worker.postMessage(data)
         }

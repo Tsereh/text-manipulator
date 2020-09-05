@@ -1,4 +1,4 @@
-var input, selectedRules, selectedProcesses, output;
+var input, selectedRules, selectedProcess, output;
 
 function getRegex() {
     var regex = "";
@@ -32,21 +32,27 @@ self.onmessage = (e) => {
 
     input = inputData !== undefined ? inputData : input;
     selectedRules = ruleData !== undefined ? ruleData : selectedRules;
-    selectedProcesses = processData !== undefined ? processData : selectedProcesses;
+    selectedProcess = processData !== undefined ? processData : selectedProcess;
 
     output = input;
     
     if (output && selectedRules) {
-        if (selectedProcesses && selectedProcesses.length) {
-            switch (selectedProcesses[0].name) {
-                case "remove":
+        if (selectedProcess !== undefined) {
+            switch (selectedProcess.name) {
+                case "Remove":
                     output = output.replace(new RegExp(getRegex(), "g"), "");
                     break;
-                case "leave-only":
+                case "Leave only":
                     output = output.replace(new RegExp("(" + getRegex() + ")|(.)", "g"), "$1");
                     break;
-                case "replace":
-                    output = output.replace(new RegExp(getRegex(), "g"), selectedProcesses[0].value);
+                case "Replace":
+                    output = output.replace(new RegExp(getRegex(), "g"), selectedProcess.value);
+                    break;
+                case "Insert before":
+                    output = output.replace(new RegExp("(" + getRegex() + ")", "g"), selectedProcess.value + "$1");
+                    break;
+                case "Insert after":
+                    output = output.replace(new RegExp("(" + getRegex() + ")", "g"), "$1" + selectedProcess.value);
                     break;
             };
         };

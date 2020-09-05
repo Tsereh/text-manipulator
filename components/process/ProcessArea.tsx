@@ -1,36 +1,51 @@
-import { useState } from 'react'
 import { observer } from "mobx-react"
 import styled from 'styled-components'
 import ProcessStore from '../../stores/ProcessStore'
-import AddProcess from './AddProcess'
-import ProcessMenu from './ProcessMenu'
 import ProcessItem from './ProcessItem'
-import { ActionArea } from '../common/styledComponents'
+import { ActionArea, ProcessBtn } from '../common/styledComponents'
+import { ProcessTypes } from './ProcessConf'
 
-const Area = styled(ActionArea)`
-    margin-top: -15px;
-    padding-top: 15px;
+const Container = styled(ActionArea)`
+    margin-top: -10px;
     border-top: none;
     border-radius: 0 0 5px 5px;
+    background-color: #f1f8ff;
+    border-color: #c8e1ff;
+`
+const SelectProcessBtn = styled(ProcessBtn)`
+    cursor: pointer;
+    transition: background-color .2s cubic-bezier(.3,0,.5,1);
+    &:hover {
+        background-color: #f3f4f6;
+    }
+`
+const Ul = styled.ul`
+    padding: 0;
+    margin: 0;
+`
+const Li = styled.li`
+    display: inline-block;
 `
 
 const ProcessArea = observer(() => {
-    const [menuVisibility, setMenuVisibility] = useState(false)
-
-    const toggleMenuVisibility = () => {
-        setMenuVisibility(!menuVisibility)
-    }
-
     return (
-        <Area>
-            {ProcessStore.selectedProcesses.map((_process, index) => {
-                return <ProcessItem processIndex={index} key={index} />
-            })}
-            <AddProcess toggleMenuVisibility={toggleMenuVisibility} />
-            {menuVisibility && (
-                <ProcessMenu toggleMenuVisibility={toggleMenuVisibility} />
+        <Container>
+            {!ProcessStore.selectedProcess ? (
+                <Ul>
+                    {ProcessTypes.map((processType, index) => (
+                        <Li key={index}>
+                            <SelectProcessBtn onClick={() => {
+                                ProcessStore.selectProcess(processType)
+                            }}>
+                                {processType.name}
+                            </SelectProcessBtn>
+                        </Li>
+                    ))}
+                </Ul>
+            ) : (
+                <ProcessItem />
             )}
-        </Area>
+        </Container>
     )
 })
 

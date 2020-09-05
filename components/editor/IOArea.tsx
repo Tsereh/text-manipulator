@@ -39,6 +39,7 @@ const HighlighToggle = styled.label`
     cursor: pointer;
     font-size: 17px;
     user-select: none;
+    color: #586069;
     & input {
         position: absolute;
         opacity: 0;

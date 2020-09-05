@@ -22,7 +22,14 @@ export const ItemBtn = styled.span`
 `
 
 export const ProcessBtn = styled(ItemBtn)`
-    background-color: #e4f0f5;
+    margin: 3px;
+    border-radius: 3px;
+    width: fit-content;
+    color: #586069;
+    box-shadow: inset 0 1px 0 rgba(225,228,232,.2);
+    border: 1px solid #e1e4e8;
+    background-color: #fff;
+    min-height: 31px;
 `
 
 export const RuleBtn = styled(ItemBtn)`
