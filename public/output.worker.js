@@ -32,29 +32,27 @@ self.onmessage = (e) => {
 
     input = inputData !== undefined ? inputData : input;
     selectedRules = ruleData !== undefined ? ruleData : selectedRules;
-    selectedProcess = processData !== undefined ? processData : selectedProcess;
-
+    selectedProcess = e.data.processData && processData !== undefined ? processData : selectedProcess;
+    
     output = input;
     
-    if (output && selectedRules) {
-        if (selectedProcess !== undefined) {
-            switch (selectedProcess.name) {
-                case "Remove":
-                    output = output.replace(new RegExp(getRegex(), "g"), "");
-                    break;
-                case "Leave only":
-                    output = output.replace(new RegExp("(" + getRegex() + ")|(.)", "g"), "$1");
-                    break;
-                case "Replace":
-                    output = output.replace(new RegExp(getRegex(), "g"), selectedProcess.value);
-                    break;
-                case "Insert before":
-                    output = output.replace(new RegExp("(" + getRegex() + ")", "g"), selectedProcess.value + "$1");
-                    break;
-                case "Insert after":
-                    output = output.replace(new RegExp("(" + getRegex() + ")", "g"), "$1" + selectedProcess.value);
-                    break;
-            };
+    if (output && selectedRules && selectedProcess !== undefined) {
+        switch (selectedProcess.name) {
+            case "Remove":
+                output = output.replace(new RegExp(getRegex(), "g"), "");
+                break;
+            case "Leave only":
+                output = output.replace(new RegExp("(" + getRegex() + ")|(.)", "g"), "$1");
+                break;
+            case "Replace":
+                output = output.replace(new RegExp(getRegex(), "g"), selectedProcess.value);
+                break;
+            case "Insert before":
+                output = output.replace(new RegExp("(" + getRegex() + ")", "g"), selectedProcess.value + "$1");
+                break;
+            case "Insert after":
+                output = output.replace(new RegExp("(" + getRegex() + ")", "g"), "$1" + selectedProcess.value);
+                break;
         };
     }
 

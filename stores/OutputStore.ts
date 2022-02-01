@@ -35,7 +35,8 @@ class OutputStore {
         }
     )
 
-    sendProcesses = autorun(
+    sendProcess = reaction(
+        () => [!ProcessStore.selectedProcess === undefined, ProcessStore.selectedProcess && ProcessStore.selectedProcess.value],
         () => {
             const data = {
                 processData: toJS(ProcessStore.selectedProcess)
